@@ -1,0 +1,195 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 220 20% 97%;
+    --foreground: 222 47% 11%;
+
+    --surface: 0 0% 100%;
+    --surface-muted: 210 20% 95%;
+    --surface-elevated: 0 0% 100%;
+    --surface-border: 214 32% 91%;
+
+    --card: 0 0% 100%;
+    --card-foreground: 222 47% 11%;
+    --card-border: 214 32% 91%;
+
+    --primary: 239 84% 67%;
+    --primary-foreground: 0 0% 100%;
+
+    --secondary: 210 40% 96%;
+    --secondary-foreground: 222 47% 11%;
+
+    --muted: 210 40% 96%;
+    --muted-foreground: 215 16% 47%;
+
+    --accent: 210 40% 96%;
+    --accent-foreground: 222 47% 11%;
+
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 210 40% 98%;
+
+    --border: 214 32% 91%;
+    --input: 214 32% 91%;
+    --ring: 239 84% 67%;
+
+    --radius: 0.625rem;
+
+    /* Status Colors */
+    --status-not-started-bg: 215 16% 92%;
+    --status-not-started-text: 215 16% 40%;
+    --status-not-started-border: 215 16% 85%;
+
+    --status-in-progress-bg: 217 91% 95%;
+    --status-in-progress-text: 217 91% 40%;
+    --status-in-progress-border: 217 91% 85%;
+
+    --status-revision-bg: 38 92% 94%;
+    --status-revision-text: 38 92% 35%;
+    --status-revision-border: 38 92% 82%;
+
+    --status-mastered-bg: 142 76% 94%;
+    --status-mastered-text: 142 76% 30%;
+    --status-mastered-border: 142 76% 80%;
+  }
+
+  .dark {
+    /* Deep slate Linear-grade dark theme */
+    --background: 224 35% 6%;
+    --foreground: 210 20% 98%;
+
+    --surface: 224 30% 9%;
+    --surface-muted: 224 25% 12%;
+    --surface-elevated: 224 28% 14%;
+    --surface-border: 224 20% 18%;
+
+    --card: 224 30% 9%;
+    --card-foreground: 210 20% 98%;
+    --card-border: 224 20% 16%;
+
+    --primary: 239 84% 67%;
+    --primary-foreground: 0 0% 100%;
+
+    --secondary: 224 25% 13%;
+    --secondary-foreground: 210 20% 98%;
+
+    --muted: 224 25% 14%;
+    --muted-foreground: 217 19% 60%;
+
+    --accent: 224 25% 15%;
+    --accent-foreground: 210 20% 98%;
+
+    --destructive: 0 72% 51%;
+    --destructive-foreground: 210 20% 98%;
+
+    --border: 224 20% 16%;
+    --input: 224 20% 16%;
+    --ring: 239 84% 67%;
+
+    /* Dark Status Colors */
+    --status-not-started-bg: 224 20% 14%;
+    --status-not-started-text: 217 15% 65%;
+    --status-not-started-border: 224 20% 20%;
+
+    --status-in-progress-bg: 221 83% 53% / 0.15;
+    --status-in-progress-text: 217 91% 70%;
+    --status-in-progress-border: 221 83% 53% / 0.35;
+
+    --status-revision-bg: 38 92% 50% / 0.15;
+    --status-revision-text: 38 92% 65%;
+    --status-revision-border: 38 92% 50% / 0.35;
+
+    --status-mastered-bg: 142 76% 45% / 0.15;
+    --status-mastered-text: 142 76% 65%;
+    --status-mastered-border: 142 76% 45% / 0.35;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  
+  html {
+    color-scheme: dark light;
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+    font-feature-settings: "cv02", "cv03", "cv04", "cv11";
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    transition: background-color 0.3s cubic-bezier(0.16, 1, 0.3, 1),
+                color 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+}
+
+/* Glassmorphism utility */
+.glass-panel {
+  background: hsl(var(--surface) / 0.85);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid hsl(var(--border) / 0.8);
+}
+
+.glass-modal {
+  background: hsl(var(--surface) / 0.95);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid hsl(var(--border));
+}
+
+/* Modern minimalist scrollbars */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: hsl(var(--muted-foreground) / 0.25);
+  border-radius: 9999px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: hsl(var(--muted-foreground) / 0.4);
+}
+
+/* Accessibility: respect reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  *, ::before, ::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* Print Stylesheet for Study Summary Report */
+@media print {
+  body {
+    background: white !important;
+    color: black !important;
+  }
+  .no-print,
+  nav,
+  aside,
+  header,
+  button,
+  .print-hide {
+    display: none !important;
+  }
+  .print-only {
+    display: block !important;
+  }
+  .print-card {
+    border: 1px solid #ccc !important;
+    box-shadow: none !important;
+    break-inside: avoid;
+    margin-bottom: 1rem;
+    page-break-inside: avoid;
+  }
+}
