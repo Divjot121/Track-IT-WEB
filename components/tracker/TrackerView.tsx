@@ -143,7 +143,7 @@ export const TrackerView: React.FC<TrackerViewProps> = ({ onNavigateTab }) => {
   };
 
   return (
-    <div className="flex flex-col h-[calc(100vh-4rem)] overflow-hidden">
+    <div className="flex flex-col h-[calc(100dvh-8rem)] lg:h-[calc(100dvh-4rem)] overflow-hidden">
       {/* Subject Switcher Tabs Bar */}
       <div className="px-6 py-2.5 border-b border-border bg-surface/50 flex items-center justify-between gap-4 shrink-0 overflow-x-auto">
         <div className="flex items-center gap-1.5 shrink-0">

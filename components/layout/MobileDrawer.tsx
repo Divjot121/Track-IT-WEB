@@ -22,6 +22,7 @@ import {
   ChevronRight,
   Play,
   Pause,
+  Search,
 } from 'lucide-react';
 
 interface MobileDrawerProps {
@@ -40,7 +41,7 @@ export const MobileDrawer: React.FC<MobileDrawerProps> = ({
   onOpenExportModal,
 }) => {
   const { status: timerStatus, timeLeft, elapsed, mode: timerMode, start, pause } = useTimerStore();
-  const { chapterDataMap, setOnboardingOpen } = useAppStore();
+  const { chapterDataMap, setOnboardingOpen, setCommandPaletteOpen } = useAppStore();
   const { user, setAuthModalOpen } = useSyncStore();
   const { theme, setTheme } = useTheme();
 
@@ -181,6 +182,18 @@ export const MobileDrawer: React.FC<MobileDrawerProps> = ({
               <Download className="w-5 h-5 text-purple-500" />
               <div className="text-xs font-bold text-foreground">Backup & Export</div>
               <div className="text-[10px] text-muted-foreground">JSON data export</div>
+            </button>
+
+            <button
+              onClick={() => {
+                onClose();
+                setCommandPaletteOpen(true);
+              }}
+              className="p-3.5 rounded-2xl bg-muted/30 border border-border/70 hover:bg-muted/60 text-left space-y-1 transition-colors min-h-[44px]"
+            >
+              <Search className="w-5 h-5 text-primary" />
+              <div className="text-xs font-bold text-foreground">Command Palette</div>
+              <div className="text-[10px] text-muted-foreground">Search chapters & tools</div>
             </button>
           </div>
 

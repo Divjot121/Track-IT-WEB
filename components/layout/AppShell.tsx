@@ -144,7 +144,11 @@ export const AppShell: React.FC = () => {
           onOpenExportModal={() => setIsExportModalOpen(true)}
         />
 
-        <main className="flex-1 overflow-y-auto bg-background/50 relative pb-16 lg:pb-0">
+        <main
+          className={`flex-1 bg-background/50 relative ${
+            activeTab === 'tracker' ? 'overflow-hidden' : 'overflow-y-auto pb-16 lg:pb-0'
+          }`}
+        >
           {isInitialDataPulling ? (
             activeTab === 'tracker' ? (
               <TrackerSkeleton />

@@ -1,6 +1,7 @@
 import { create } from 'zustand';
 import { Repository } from '../db/repository';
 import { SyncEngine } from '../sync/syncEngine';
+import { useAppStore } from './useAppStore';
 
 interface TimerState {
   mode: 'pomodoro' | 'stopwatch';
@@ -107,7 +108,7 @@ export const useTimerStore = create<TimerState>((set, get) => ({
     const { mode, elapsed, targetMinutes, subjectId, chapterId, chapterTitle, isBreak } = get();
     const duration = mode === 'pomodoro' ? targetMinutes * 60 : elapsed;
 
-    if (duration > 30 && !isBreak) {
+    if (duration >= 10 && !isBreak) {
       // Save session if at least 30 seconds
       const sessionObj = {
         subjectId,
@@ -117,7 +118,9 @@ export const useTimerStore = create<TimerState>((set, get) => ({
         mode,
         timestamp: new Date().toISOString(),
       };
-      Repository.addStudySession(sessionObj);
+      Repository.addStudySession(sessionObj).then(() => {
+        useAppStore.getState().refreshData();
+      });
       SyncEngine.enqueue('study_session', sessionObj);
     }
 
